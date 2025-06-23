@@ -60,15 +60,15 @@ jobs:
       - name: Send email
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp.gmail.com
+          server_address: smtp.mail.me.com
           server_port: 587
           username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          from: ${{ secrets.EMAIL_USERNAME }}  
+          password: ${{ secrets.EMAIL_PASSWORD }}  
+          from: ${{ secrets.EMAIL_USERNAME }}      
           subject: "✅ Déploiement réussi - TheBeyonder237/NgoueDavidRogerYannick_KIA-22-2E-383_GIT-GITHUB"
           body: |
             Projet : TheBeyonder237/NgoueDavidRogerYannick_KIA-22-2E-383_GIT-GITHUB
             URL GitHub : https://github.com/TheBeyonder237/NgoueDavidRogerYannick_KIA-22-2E-383_GIT-GITHUB
-            Commit : f03ff103253d1da be675bcbaba3b393b6a90d921
+            Commit : f03ff103253d1dabe675bcbaba3b393b6a90d921
             ✅ Lien Hugging Face : https://huggingface.co/DavidNgoue/modele_sn_git_github
           to: ngouedavidrogeryannick@gmail.com
