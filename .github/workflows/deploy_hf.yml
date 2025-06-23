@@ -8,7 +8,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -30,35 +29,33 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          python <<EOF
-            from huggingface_hub import HfApi
+          python <<-EOF
+          from huggingface_hub import HfApi
+          api = HfApi(token="${HF_TOKEN}")
+          repo_id = "DavidNgoue/modele_sn_git_github"
+          repo_type = "model"
 
-            api = HfApi(token="${HF_TOKEN}")
-            repo_id = "DavidNgoue/modele_sn_git_github"
-            repo_type = "model"
+          try:
+              api.create_repo(repo_id=repo_id, repo_type=repo_type, exist_ok=True)
+              print(f"Dépôt créé ou déjà existant : {repo_id}")
+          except Exception as e:
+              print(f"Erreur lors de la création du dépôt : {e}")
 
-            try:
-                api.create_repo(repo_id=repo_id, repo_type=repo_type, exist_ok=True)
-                print(f"Dépôt créé ou déjà existant : {repo_id}")
-            except Exception as e:
-                print(f"Erreur lors de la création du dépôt : {e}")
-
-            try:
-                api.upload_file(path_or_fileobj="model.joblib", path_in_repo="model.joblib", repo_id=repo_id, repo_type=repo_type)
-                print("✅ model.joblib uploadé.")
-                api.upload_file(path_or_fileobj="model.py", path_in_repo="model.py", repo_id=repo_id, repo_type=repo_type)
-                print("✅ model.py uploadé.")
-                api.upload_file(path_or_fileobj="README.md", path_in_repo="README.md", repo_id=repo_id, repo_type=repo_type)
-                print("✅ README.md uploadé.")
-            except Exception as e:
-                print(f"❌ Erreur lors de l'envoi des fichiers : {e}")
-            EOF
+          try:
+              api.upload_file(path_or_fileobj="model.joblib", path_in_repo="model.joblib", repo_id=repo_id, repo_type=repo_type)
+              print("✅ model.joblib uploadé.")
+              api.upload_file(path_or_fileobj="model.py", path_in_repo="model.py", repo_id=repo_id, repo_type=repo_type)
+              print("✅ model.py uploadé.")
+              api.upload_file(path_or_fileobj="README.md", path_in_repo="README.md", repo_id=repo_id, repo_type=repo_type)
+              print("✅ README.md uploadé.")
+          except Exception as e:
+              print(f"❌ Erreur lors de l'envoi des fichiers : {e}")
+          EOF
 
   notify:
     needs: deploy
     if: success()
     runs-on: ubuntu-latest
-
     steps:
       - name: Send email
         uses: dawidd6/action-send-mail@v3
