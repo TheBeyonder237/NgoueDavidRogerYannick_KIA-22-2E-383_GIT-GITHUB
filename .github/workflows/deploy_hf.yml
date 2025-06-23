@@ -64,10 +64,11 @@ jobs:
           server_port: 587
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: "✅ Déploiement réussi - ${{ github.repository }}"
+          from: ${{ secrets.EMAIL_USERNAME }}  
+          subject: "✅ Déploiement réussi - TheBeyonder237/NgoueDavidRogerYannick_KIA-22-2E-383_GIT-GITHUB"
           body: |
-            Projet : ${{ github.repository }}
-            URL GitHub : ${{ github.server_url }}/${{ github.repository }}
-            Commit : ${{ github.sha }}
+            Projet : TheBeyonder237/NgoueDavidRogerYannick_KIA-22-2E-383_GIT-GITHUB
+            URL GitHub : https://github.com/TheBeyonder237/NgoueDavidRogerYannick_KIA-22-2E-383_GIT-GITHUB
+            Commit : f03ff103253d1da be675bcbaba3b393b6a90d921
             ✅ Lien Hugging Face : https://huggingface.co/DavidNgoue/modele_sn_git_github
           to: ngouedavidrogeryannick@gmail.com
