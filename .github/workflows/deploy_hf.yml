@@ -29,7 +29,7 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          python -c "from huggingface_hub import HfApi; api = HfApi(token='${{ secrets.HF_TOKEN }}'); api.upload_file(path_or_fileobj='model.joblib', path_in_repo='model.joblib', repo_id='your-username/ia-model-repo', repo_type='model'); api.upload_file(path_or_fileobj='model.py', path_in_repo='model.py', repo_id='your-username/ia-model-repo', repo_type='model'); api.upload_file(path_or_fileobj='README.md', path_in_repo='README.md', repo_id='your-username/ia-model-repo', repo_type='model')"
+          python -c "from huggingface_hub import HfApi; api = HfApi(token='${{ secrets.HF_TOKEN }}'); api.upload_file(path_or_fileobj='model.joblib', path_in_repo='model.joblib', repo_id='DavidNgoue/modele_sn_git_github', repo_type='model'); api.upload_file(path_or_fileobj='model.py', path_in_repo='model.py', repo_id='your-username/ia-model-repo', repo_type='model'); api.upload_file(path_or_fileobj='README.md', path_in_repo='README.md', repo_id='your-username/ia-model-repo', repo_type='model')"
 
   notify:
     needs: deploy
